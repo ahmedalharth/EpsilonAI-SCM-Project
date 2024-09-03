@@ -45,6 +45,8 @@ if st.session_state.page == "Introduction":
     st.write("""SCM Dataset with Green Logistics
              The dataset titled "SCM Dataset with Green Logistics" comprises a comprehensive collection of data from various companies, detailing their supply chain management (SCM) practices, performance metrics, and green logistics initiatives.
               \n* Data source [Kaggle](https://www.kaggle.com/datasets/lastman0800/supply-chain-management).""")
+    
+    
 
 # # Create a container
 #     with st.container():
