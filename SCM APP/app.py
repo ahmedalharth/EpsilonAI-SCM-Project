@@ -11,8 +11,21 @@ from IPython import display
 
 ###################################################
 # VARIABLES #
+# Paths
+primary_data = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM_Dataset_Updated_with_Green_Logistics.xlsx'
+clean_data_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Clean_df.csv'
+train_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Train.csv'
+test_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Test.csv'
 
-data = pd.read_csv("/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Clean_df.csv")
+# read the data 
+data = pd.read_excel( primary_data, sheet_name='Sheet1')
+Clean_df = pd.read_csv(clean_data_path)
+Train = pd.read_csv(train_path)
+Test = pd.read_csv(test_path)
+
+
+
+Clean_data = pd.read_csv("/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Clean_df.csv")
 # Create the metadata dictionary
 columns = {
     'Company Name': {'sdtype': 'id'},
@@ -77,14 +90,18 @@ def create_data_description(df):
 def show_sidebar_content(content_type):
     st.sidebar.title("Sidebar Information")
 
-    if content_type == "data_description":
-        # Display data description in the sidebar
-        description_df = create_data_description(data)
-        st.sidebar.table(description_df)
-
-    elif content_type == "SCM Metadata Table":
+    if content_type == "SCM Metadata Table":
+        
+        st.sidebar.write("Table 3.1: Metadata table")
+            
         # Display summary statistics in the sidebar
-            st.sidebar.table(metadata_df)
+        st.sidebar.table(metadata_df.style.hide(axis='index'))
+
+    elif content_type == "data_description":
+        # Display data description in the sidebar
+        st.sidebar.write("Table 3.2: Describtion table")
+        description_df = create_data_description(data)
+        st.sidebar.table(description_df.style.hide(axis='index'))
 
 # ##################################################
 # st.dataframe(data=data)
@@ -110,6 +127,26 @@ intro, analysis , rsults = st.tabs(
 
 with intro:
 
+    # if "sidebar_content" not in st.session_state:
+    #     st.session_state.sidebar_content = None
+
+    # # Initialize session state for sidebar content
+    # if "sidebar_content" not in st.session_state:
+    #     st.session_state.sidebar_content = None
+
+    # # Buttons to control what is shown in the sidebar
+    # if st.button("Show Data Description"):
+    #     st.session_state.sidebar_content = "data_description"
+
+    # if st.button("Show Summary Statistics"):
+    #     st.session_state.sidebar_content = "summary_statistics"
+
+    # if st.button("Show Custom Message"):
+    #     st.session_state.sidebar_content = "custom_message"
+
+    # # Update the sidebar content based on user clicks
+    # show_sidebar_content(st.session_state.sidebar_content)
+
     col1 , col2 = st.columns(2)
     # 1 Introduction
     with col1:
@@ -129,11 +166,17 @@ with intro:
         st.write("""In today's global economy, supply chain disruptions pose a significant threat to businesses, affecting their ability to deliver products on time and maintain profitability.
                 The increasing complexity of supply chains, coupled with the growing emphasis on environmental sustainability, requires companies to carefully balance efficiency, cost, and risk.
                 Despite the wealth of data available, many companies struggle to effectively assess and manage supply chain risk.""")
-            
+       
     with col2:
         st.write("""Traditional risk management approaches often fail to account for the dynamic nature of global supply chains and the diverse factors influencing risk. 
                 Therefore, there is a need for a data-driven approach to predict and mitigate supply chain risk, considering both SCM practices and green logistics initiatives.""")
-       
+        
+        st.subheader("3 Objective")
+        st.write("""The goal of this project is to create a predictive model that can accurately estimate the risk level in a supply chain. 
+                 The model's goal is to identify and quantify the elements that contribute to supply chain risk,
+                     allowing organizations to reduce future interruptions and optimize their supply chain operations in advance. 
+                 The goal is to deliver a robust, data-driven solution that improves supply chain decision-making by accurately predicting risk.""")
+        
         #***************
         # 3 DATA
         st.subheader("3 The Data")
@@ -145,7 +188,7 @@ with intro:
         # 3.1 Data carde 
         st.write("##### **3.1 SCM Data Card**")
 
-        st.write("""* **Primary Key**: ***Company Name***.\n * Metadata Specification Version: ***SINGLE_TABLE_V1***.""")
+        st.write("""* **Primary Key**: ***Company Name***.\n* Metadata Specification Version: ***SINGLE_TABLE_V1***.""")
 
         # Hyperlink to "show" the sidebar (simulated with a button)
         st.write("* Metad Data Table:")
@@ -160,7 +203,8 @@ with intro:
 
         
         st.subheader("3 Model-building process")
-        st.write("The model bulding process involve cirten phases and backword/forword")
+        st.write("The model-building process has eight phases, as shown in the following figure:")
+        
 
     
 
