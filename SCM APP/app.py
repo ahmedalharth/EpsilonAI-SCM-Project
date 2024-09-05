@@ -175,8 +175,10 @@ def show_sidebar_content(content_type):
 st.set_page_config(page_title="Supply Chain Risk Predictive Modeling", page_icon=icon_image , layout="wide")
 st.title("**SMC App**")
 
-st.sidebar.header(("Deploy"))
-
+st.sidebar.header("Wellcome to SCM APP")
+st.sidebar.write("""You well find three tabs\na. Represntation.\nb. Data Analysis.\nc. Model.\n have fun navigating through them.""")
+st.sidebar.write("next is explor part for tables from the main page")
+st.sidebar.subheader("Sidebar Information")
 
 intro, analysis , Model = st.tabs(
     [
