@@ -150,7 +150,6 @@ def create_data_description(df):
 
 
 def show_sidebar_content(content_type):
-    st.sidebar.subheader("Sidebar Information")
 
     if content_type == "SCM Metadata Table":
         
