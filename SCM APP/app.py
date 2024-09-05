@@ -8,6 +8,15 @@ from PIL import Image
 
 from IPython import display
 
+import streamlit as st
+
+import pandas as pd
+
+import xgboost as xgb
+
+import pickle
+
+
 
 
 
@@ -19,13 +28,13 @@ clean_data_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-co
 train_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Data/Train.csv'
 test_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Data/Test.csv'
 # images
-icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/images/Supply-Chain-Management.png')
+icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
 model_process = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/SMC Model-building-process  copy.png')
 SCM_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Supply-Chain-Management-benefits.png')
 # 
 
 # read the data 
-data = pd.read_excel( primary_data, sheet_name='Sheet1')
+Old_data = pd.read_excel( primary_data, sheet_name='Sheet1')
 Clean_df = pd.read_csv(clean_data_path)
 Train = pd.read_csv(train_path)
 Test = pd.read_csv(test_path)
@@ -37,6 +46,8 @@ xgb_features = ['Technology Utilized', 'Supply Chain Integration Level', 'Suppli
                  'Supply Chain Resilience Score', 'Supplier Relationship Score', 'Recycling Rate (%)', 'Use of Renewable Energy (%)']
 X_train = Train[xgb_features]
 y_train = Train[Target]
+
+num_xgb = X_train.select_dtypes(exclude="O").columns.to_list()
 
 
 # Create the metadata dictionary
@@ -167,11 +178,11 @@ st.title("**SMC App**")
 st.sidebar.header(("Deploy"))
 
 
-intro, analysis , rsults = st.tabs(
+intro, analysis , Model = st.tabs(
     [
-        "Introduction",
-        "Data Analysis",
-        "Results"
+        "a. Represntation",
+        "b. Data Analysis",
+        "c. Model"
     ]
 )
 
@@ -273,59 +284,225 @@ with analysis:
               In addition, we will evaluate the risks and resilience levels, delivering practical insights to improve operations.
              By the end of this analysis, you should have a better grasp of the data, the predictive potential of key variables, and how to successfully manage supply chain risks.**""")
 
-    st.header("**Univariate Analysis**")
+    st.header("**Supply Chain Risk(%) Analyiss**")
 
+    st.subheader("1 Mean of Supply chain risk amonge diferent groups")
     col1 , col2 = st.columns(2)
-
-    with col1:
-        st.subheader("Categorical Features")
-        st.write("""* **Technology Utilized: the most technologies used by com[ony**""")
-        st.table(Train["Technology Utilized"].value_counts())
-
     
-    with col2:
-        # Create bar plot with Plotly Express
+    with col1:
+        st.write("""\n* **Table b.1: Supply chain risk mean per technologies**""")
+        
+        grouped_data_tec= Train.groupby('Technology Utilized')[Target].agg(['mean'])
+        st.table(grouped_data_tec['mean'])
+        
+        st.write("""* **Figure b.1: Technology Utilized mean Distribution**""")
+        # Create pie chart using Plotly Express
         data = {
-    'Technology Utilized': ['AI, Blockchain, ERP', 'AI, ERP, Robotics', 'AI, Blockchain, Robotics', 'ERP, JIT, Robotics'],
-    'Count': [82404, 15279, 4093, 3767]
-        }
+        'Technology Utilized': ['AI, Blockchain, ERP', 'AI, Blockchain, Robotics', 'AI, ERP, Robotics', 'ERP, JIT, Robotics'],
+        'Mean': [8.8042, 9.7022, 9.3836, 9.3085]
+            }
 
         # Create DataFrame from the data
         df = pd.DataFrame(data)
-
-        # Create pie chart with Plotly Express
-        fig = px.pie(df, names='Technology Utilized', values='Count', title='Technology Utilized Distribution')
-
+        fig = px.pie(df, names='Technology Utilized', values='Mean', title='Technology Utilized Proportion Distribution')
+        fig.update_layout(width=500, height=350)
         # Display the pie chart in Streamlit
-        st.write("## Technology Utilized Pie Chart")
         st.plotly_chart(fig)
-# Add a hyperlink to scroll to the table
-# st.markdown("[Jump to SCM Metadata Table](#scm-metadata-table)")
-  
 
-# # Create a container model-building process
-#     with st.container():
-#         st.write("This is inside a container")
+        st.write("""\n* **Table b.2: Supply chain risk mean per Supply Chain Integration Level**""")
 
-#     # Create columns
-#         col1, col2 = st.columns(2)
-#         with col1:
-#             st.header("Column 1")
-#             st.write("Content for the first column")
-#         with col2:
-#             st.header("Column 2")
-#             st.write("Content for the second column")
+        data = {
+        'Supply Chain Integration Level': ["Highe","Medium"],
+        'Mean': [8.5742, 10.4922]
+            }
+        st.table(data)
 
-#     # Outside the container
-#         st.write("This is outside the container")
+    
+    with col2:
 
 
-    # elif st.session_state.page == "Data Analysis":
-    #     st.title("Data Analysis")
-    #     st.write("This is the data analysis page.")
+        st.write("""\n* **Table b.3: Supply chain risk mean per Supplier Collaboration Level**""")
+        data2 = {
+        'Supplier Collaboration Level': ["Highe","Medium"],
+        'Mean': [8.3197, 10.4366]
+            }
 
-    # elif st.session_state.page == "Results":
-    #     st.title("Results")
-    #     st.write("This is the results page.")
+        st.table(data2)
 
-        # st.markdown("Metadata Table: [Jump to SCM Metadata Table](#scm-metadata-table)")
+        cola,colb = st.columns(2)
+
+        with cola:
+            # fig = px.bar(data_frame=df_1,x='Technology Utilized' , y="Mean" )
+            st.write("""\n* **Figure b.2: Supply chain risk mean per Supplier Chain Integration Level**""")
+            fig = px.bar(data, x= 'Supply Chain Integration Level', y='Mean', title='Risk per Supplier Chain Integration Level')
+            fig.update_layout(width=500, height=350)
+            # Display the pie chart in Streamlit
+            st.plotly_chart(fig , use_container_width=True)
+
+        with colb:
+            st.write("""\n* **Figure b.3: Supply chain risk mean per Supplier Collaboration Level**""")
+            fig = px.bar(data2, x= 'Supplier Collaboration Level', y='Mean', title='Risk per Supplier Collaboration Level')
+            fig.update_layout(width=500, height=350)
+            # Display the pie chart in Streamlit
+            st.plotly_chart(fig , use_container_width=True)
+
+        
+        st.write("""\n* **Conclusion:**
+                 \n1. Supply chain Risk is low for technology combnation of [AI, Blockchain, ERP].
+                 \n2. Supply chain Risk is High for low level supply power.""")
+        
+    
+    st.subheader("2 Correlation with Supply chain Risk")
+
+
+    # Data for the dataframe
+    data = {
+        "Features": [
+            "Lead Time (days)", 
+            "Order Fulfillment Rate (%)", 
+            "Supplier Lead Time Variability (days)",
+            "Inventory Accuracy (%)", 
+            "Transportation Cost Efficiency (%)", 
+            "Cost of Goods Sold (COGS)", 
+            "Operational Efficiency Score", 
+            "Revenue Growth Rate out of (15)", 
+            "Supply Chain Resilience Score", 
+            "Supplier Relationship Score", 
+            "Recycling Rate (%)", 
+            "Use of Renewable Energy (%)"
+        ],
+        "r": [
+            0.8508, 
+            -0.8509, 
+            0.8234, 
+            -0.1689, 
+            -0.0157, 
+            -0.3380, 
+            -0.2526, 
+            -0.5244, 
+            -0.8720, 
+            -0.7491, 
+            -0.0104, 
+            -0.0011
+        ]
+    }
+
+    # Creating the dataframe
+    df = pd.DataFrame(data)
+
+    st.write("**Table b.4: Correlation with target using preson correlation coefficients (r).**")
+
+    st.table(df)
+
+    st.write("""**Most Informative Features Based on Table b.4:** 
+
+        \n1. Supply Chain Resilience Score (r = -0.8720): This feature has the highest absolute value of the correlation coefficient, indicating it is the most strongly related to the target.
+        \n2. Order Fulfillment Rate (%) (r = -0.8509): This feature has a strong negative correlation with the target.
+        \n3.    Lead Time (days) (r = 0.8508): This feature also has a strong positive correlation with the target.
+        \n4.    Supplier Relationship Score (r = -0.7491): This feature has a high absolute value of correlation, indicating its importance.
+        \n5.    Supplier Lead Time Variability (days) (r = 0.8234): This feature shows a significant positive correlation with the target.""")
+    
+
+
+with Model:
+    
+    # Load the pre-trained XGBoost model
+    model_path = "/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Models/Xgb_pipeline.pkl"  # Replace with your model file path
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+
+    lb_path = "/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Models/label_encoders.pkl"
+    # Load fitted LabelEncoders for categorical features
+    with open(lb_path, 'rb') as file:
+        label_encoders = pickle.load(file)
+
+    # List of features for user input
+    xgb_features = [
+        'Technology Utilized', 'Supply Chain Integration Level', 'Supplier Collaboration Level', 'Lead Time (days)',
+        'Order Fulfillment Rate (%)', 'Supplier Lead Time Variability (days)', 'Inventory Accuracy (%)', 
+        'Transportation Cost Efficiency (%)', 'Cost of Goods Sold (COGS)', 'Operational Efficiency Score', 
+        'Revenue Growth Rate out of (15)', 'Supply Chain Resilience Score', 'Supplier Relationship Score', 
+        'Recycling Rate (%)', 'Use of Renewable Energy (%)'
+    ]
+
+    # Streamlit app layout
+    st.title('Supply Chain Risk Prediction App')
+
+    technology_options = [
+    'AI, Blockchain, ERP',
+    'AI, ERP, Robotics',
+    'ERP, JIT, Robotics',
+    'AI, Blockchain, Robotics'
+    ]
+
+    integration_level_options = ['Medium', 'High']
+    collaboration_level_options = ['Medium', 'High']
+
+    # Streamlit app layout
+
+    st.write("Please fill in the details below to predict the supply chain risk (%).")
+
+    # Input fields for categorical features
+    st.subheader('Categorical Features')
+    technology_utilized = st.selectbox('Technology Utilized', technology_options, help="Select the combination of technologies utilized in the supply chain.")
+    integration_level = st.selectbox('Supply Chain Integration Level', integration_level_options, help="Select the level of integration within the supply chain.")
+    collaboration_level = st.selectbox('Supplier Collaboration Level', collaboration_level_options, help="Select the level of collaboration with suppliers.")
+
+    # Input fields for numerical features
+    st.subheader('Numerical Features')
+    lead_time = st.number_input('Lead Time (days)', min_value=0.0, max_value=365.0, value=30.0, help="Enter the lead time in days. Range: 0-365.")
+    order_fulfillment_rate = st.slider('Order Fulfillment Rate (%)', min_value=0.0, max_value=100.0, value=95.0, step=0.1, help="Enter the order fulfillment rate as a percentage.")
+    supplier_lead_time_variability = st.number_input('Supplier Lead Time Variability (days)', min_value=0.0, max_value=100.0, value=5.0, help="Enter the variability in supplier lead time in days. Range: 0-100.")
+    inventory_accuracy = st.slider('Inventory Accuracy (%)', min_value=0.0, max_value=100.0, value=98.0, step=0.1, help="Enter the inventory accuracy percentage.")
+    transportation_cost_efficiency = st.slider('Transportation Cost Efficiency (%)', min_value=0.0, max_value=100.0, value=85.0, step=0.1, help="Enter the transportation cost efficiency as a percentage.")
+    cogs = st.number_input('Cost of Goods Sold (COGS)', min_value=0.0, value=10000.0, help="Enter the cost of goods sold in your currency.")
+    operational_efficiency_score = st.slider('Operational Efficiency Score', min_value=0.0, max_value=100.0, value=75.0, step=0.1, help="Enter the operational efficiency score.")
+    revenue_growth_rate = st.number_input('Revenue Growth Rate out of (15)', min_value=0.0, max_value=15.0, value=5.0, help="Enter the revenue growth rate out of 15.")
+    supply_chain_resilience_score = st.slider('Supply Chain Resilience Score', min_value=0.0, max_value=100.0, value=80.0, step=0.1, help="Enter the supply chain resilience score.")
+    supplier_relationship_score = st.slider('Supplier Relationship Score', min_value=0.0, max_value=100.0, value=70.0, step=0.1, help="Enter the supplier relationship score.")
+    recycling_rate = st.slider('Recycling Rate (%)', min_value=0.0, max_value=100.0, value=20.0, step=0.1, help="Enter the recycling rate as a percentage.")
+    renewable_energy_use = st.slider('Use of Renewable Energy (%)', min_value=0.0, max_value=100.0, value=30.0, step=0.1, help="Enter the percentage of renewable energy used.")
+
+    def encode_input(label_encoders, feature, value):
+        try:
+            return label_encoders[feature].transform([value])
+        except ValueError:
+            # Handle unseen categories or mismatched input gracefully
+            # st.warning(f"Unseen category for {feature}: {value}")
+            return -1  # or some default encoding
+
+    encoded_technology_utilized = encode_input(label_encoders, 'Technology Utilized', technology_utilized)
+    encoded_integration_level = encode_input(label_encoders, 'Supply Chain Integration Level', integration_level)
+    encoded_collaboration_level = encode_input(label_encoders, 'Supplier Collaboration Level', collaboration_level)
+    # Prepare input data for prediction
+    input_data = {
+        'Technology Utilized': encoded_technology_utilized,
+        'Supply Chain Integration Level': encoded_integration_level,
+        'Supplier Collaboration Level': encoded_collaboration_level,
+        'Lead Time (days)': lead_time,
+        'Order Fulfillment Rate (%)': order_fulfillment_rate,
+        'Supplier Lead Time Variability (days)': supplier_lead_time_variability,
+        'Inventory Accuracy (%)': inventory_accuracy,
+        'Transportation Cost Efficiency (%)': transportation_cost_efficiency,
+        'Cost of Goods Sold (COGS)': cogs,
+        'Operational Efficiency Score': operational_efficiency_score,
+        'Revenue Growth Rate out of (15)': revenue_growth_rate,
+        'Supply Chain Resilience Score': supply_chain_resilience_score,
+        'Supplier Relationship Score': supplier_relationship_score,
+        'Recycling Rate (%)': recycling_rate,
+        'Use of Renewable Energy (%)': renewable_energy_use
+    }
+
+
+
+    # Predict button
+    if st.button('Predict Supply Chain Risk (%)'):
+        # Convert input data to a DataFrame
+        input_df = pd.DataFrame([input_data])
+        
+        # Make prediction
+        prediction = model.predict(input_df)
+        
+        # Display the result
+        st.write(f"Predicted Supply Chain Risk (%): {prediction[0]:.2f}")
+
