@@ -6,3 +6,9 @@ pingouin==0.5.4
 streamlit==0.86.0
 scipy==1.12.0
 seaborn==0.12.2
+streamlit
+pandas
+plotly
+Pillow
+xgboost
+ipython
