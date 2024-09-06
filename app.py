@@ -47,7 +47,7 @@ with open(lb_path, 'rb') as file:
 
 # read the data 
 
-# Old_data = pd.read_excel( primary_data, sheet_name='Sheet1')
+Old_data = pd.read_excel( primary_data, sheet_name='Sheet1')
 Clean_df = pd.read_csv(clean_data_path)
 Train = pd.read_csv(train_path)
 Test = pd.read_csv(test_path)
