@@ -37,6 +37,7 @@ model_process = Image.open('SMC Model-building-process  copy.png')
 model_path = "SCM APP/Models/Xgb_pipeline.pkl"  # Replace with your model file path
 with open(model_path, 'rb') as file:
     model = pickle.load(file)
+
 lb_path = "SCM APP/Models/label_encoders.pkl"
 
 # Load fitted LabelEncoders for categorical features
@@ -46,7 +47,7 @@ with open(lb_path, 'rb') as file:
 
 # read the data 
 
-Old_data = pd.read_excel( primary_data, sheet_name='Sheet1')
+# Old_data = pd.read_excel( primary_data, sheet_name='Sheet1')
 Clean_df = pd.read_csv(clean_data_path)
 Train = pd.read_csv(train_path)
 Test = pd.read_csv(test_path)
