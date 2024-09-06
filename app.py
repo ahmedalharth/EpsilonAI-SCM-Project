@@ -186,7 +186,7 @@ def show_sidebar_content(content_type):
 
 
 
-st.set_page_config(page_title="Supply Chain Risk Predictive Modeling" , layout="wide")
+st.set_page_config(page_title="Supply Chain Risk Predictive Modeling" ,page_icon = icon_image, layout="wide")
 st.title("**SCM App**")
 
 st.sidebar.header("Wellcome to SCM APP")
