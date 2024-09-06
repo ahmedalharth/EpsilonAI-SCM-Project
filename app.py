@@ -176,7 +176,7 @@ def show_sidebar_content(content_type):
     elif content_type == "data_description":
         # Display data description in the sidebar
         st.sidebar.write("Table 3.2: Describtion table")
-        description_df = create_data_description(primary_data)
+        description_df = create_data_description(Old_data)
         st.sidebar.table(description_df.style.hide(axis='index'))
 
 # ##################################################
