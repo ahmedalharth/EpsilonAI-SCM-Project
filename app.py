@@ -28,7 +28,7 @@ clean_data_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-co
 train_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/Train.csv'
 test_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/Test.csv'
 # images
-icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
+# icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
 model_process = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/SMC Model-building-process  copy.png')
 SCM_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Supply-Chain-Management-benefits.png')
 # Load the pre-trained XGBoost model
@@ -178,7 +178,7 @@ def show_sidebar_content(content_type):
 
 
 
-st.set_page_config(page_title="Supply Chain Risk Predictive Modeling", page_icon=icon_image , layout="wide")
+st.set_page_config(page_title="Supply Chain Risk Predictive Modeling" , layout="wide")
 st.title("**SMC App**")
 
 st.sidebar.header("Wellcome to SCM APP")
