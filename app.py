@@ -191,7 +191,7 @@ st.title("**SCM App**")
 
 st.sidebar.header("Wellcome to SCM APP")
 st.sidebar.write("""You well find three tabs\na. Represntation.\nb. Data Analysis.\nc. Model.\n have fun navigating through them.""")
-st.sidebar.write("explored part for tables from the main page")
+st.sidebar.write("The next part is explore part for tables from the main page")
 st.sidebar.subheader("Sidebar Information")
 
 intro, analysis , Model = st.tabs(
