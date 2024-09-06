@@ -18,19 +18,17 @@ Interactive charts and graphs to visualize technology utilization, supplier coll
 Performance Evaluation:
 
 Evaluation of models using various metrics, with the ability to compare performance across different models.
-App Structure
-1. Home
-Introduction and overview of the app.
-Links to different sections of the app.
-2. Data Overview
-Provides a detailed summary of the dataset, including missing values, duplicates, and data shapes.
-Describes the features used in the analysis.
-3. Analysis and Insights
+# App Structure
+
+1. Represntaion
+- Introduction and overview of the app.
+- Links to different sections of the app.
+- Provides a detailed summary of the dataset, including missing values, duplicates, and data shapes.
+
+2. Analysis and Insights
 A deep dive into the data with visualizations and statistical summaries.
 Includes interactive elements for users to explore different aspects of the supply chain data.
+
 4. Predictive Modeling
 Overview of the model-building process.
 Allows users to understand the steps involved in predicting supply chain risk.
-5. Results and Conclusion
-Summarizes the findings from the analysis and modeling.
-Provides actionable insights for supply chain optimization.
