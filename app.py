@@ -28,7 +28,7 @@ clean_data_path = 'SCM APP/Data/Clean_df.csv'
 train_path = 'SCM APP/Data/Train.csv'
 test_path = 'SCM APP/Data/Test.csv'
 # images
-icon_image = Image.open('SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
+icon_image = Image.open('SCM APP/Images/SCM_icon.webp')
 model_process = Image.open('SCM APP/Images/SMC Model-building-process .jpg')
 SCM_image = Image.open('SCM APP/Images/Supply-Chain-Management-benefits.png')
 # Load the pre-trained XGBoost model
