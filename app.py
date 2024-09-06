@@ -166,6 +166,9 @@ def show_sidebar_content(content_type):
     if content_type == "SCM Metadata Table":
         
         st.sidebar.write("Table 3.1: Metadata table")
+        
+        description_df = create_data_description(primary_data)
+        st.sidebar.table(description_df)
             
         # Display summary statistics in the sidebar
         st.sidebar.table(metadata_df.style.hide(axis='index'))
