@@ -29,7 +29,7 @@ train_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-
 test_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/Test.csv'
 # images
 # icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
-model_process = Image.open('https://github.com/ahmedalharth/EpsilonAI-SCM-Project/blob/main/SCM%20APP/Images/SMC%20Model-building-process%20%20copy.png')
+model_process = Image.open('SMC Model-building-process  copy.png')
 
 # SCM_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Supply-Chain-Management-benefits.png')
 # Load the pre-trained XGBoost model
