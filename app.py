@@ -23,10 +23,10 @@ import pickle
 ################################################################
 # VARIABLES #
 # Paths
-primary_data = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Data/SCM_Dataset_Updated_with_Green_Logistics.xlsx'
-clean_data_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Data/Clean_df.csv'
-train_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Data/Train.csv'
-test_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/Data/Test.csv'
+primary_data = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/SCM_Dataset_Updated_with_Green_Logistics.xlsx'
+clean_data_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/Clean_df.csv'
+train_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/Train.csv'
+test_path = '/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Data/Test.csv'
 # images
 icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
 model_process = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/SMC Model-building-process  copy.png')
