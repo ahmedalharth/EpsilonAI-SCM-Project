@@ -9,3 +9,4 @@ plotly
 Pillow
 xgboost
 ipython
+openpyxl
