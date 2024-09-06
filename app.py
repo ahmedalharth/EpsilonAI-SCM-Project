@@ -28,10 +28,9 @@ clean_data_path = 'SCM APP/Data/Clean_df.csv'
 train_path = 'SCM APP/Data/Train.csv'
 test_path = 'SCM APP/Data/Test.csv'
 # images
-# icon_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
-model_process = Image.open('SMC Model-building-process  copy.png')
-
-# SCM_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Supply-Chain-Management-benefits.png')
+icon_image = Image.open('SCM APP/Images/Postgraduate-Diploma-in-Procurement-and-Supply-Chain-Management-Course-Objectives.jpg')
+model_process = Image.open('SCM APP/Images/SMC Model-building-process  copy.png')
+SCM_image = Image.open('SCM APP/Images/Supply-Chain-Management-benefits.png')
 # Load the pre-trained XGBoost model
 
 model_path = "SCM APP/Models/Xgb_pipeline.pkl"  # Replace with your model file path
