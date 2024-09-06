@@ -34,10 +34,10 @@ model_process = Image.open('SMC Model-building-process  copy.png')
 # SCM_image = Image.open('/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Images/Supply-Chain-Management-benefits.png')
 # Load the pre-trained XGBoost model
 
-model_path = "/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Models/Xgb_pipeline.pkl"  # Replace with your model file path
+model_path = "SCM APP/Models/Xgb_pipeline.pkl"  # Replace with your model file path
 with open(model_path, 'rb') as file:
     model = pickle.load(file)
-lb_path = "/Users/admin/Data science/Data science EpsilonAI/EpsilonAI-course-ML/Final Project/SCM/SCM APP/Models/label_encoders.pkl"
+lb_path = "SCM APP/Models/label_encoders.pkl"
 
 # Load fitted LabelEncoders for categorical features
 
