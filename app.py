@@ -167,8 +167,8 @@ def show_sidebar_content(content_type):
         
         st.sidebar.write("Table 3.1: Metadata table")
         
-        description_df = create_data_description(primary_data)
-        st.sidebar.table(description_df)
+        # description_df = create_data_description(primary_data)
+        # st.sidebar.table(description_df)
             
         # Display summary statistics in the sidebar
         st.sidebar.table(metadata_df.style.hide(axis='index'))
@@ -176,7 +176,7 @@ def show_sidebar_content(content_type):
     elif content_type == "data_description":
         # Display data description in the sidebar
         st.sidebar.write("Table 3.2: Describtion table")
-        description_df = create_data_description(data)
+        description_df = create_data_description(primary_data)
         st.sidebar.table(description_df.style.hide(axis='index'))
 
 # ##################################################
